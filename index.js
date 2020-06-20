@@ -45,7 +45,7 @@ client.on('ready', async () => {
     console.log('ready');
 
     try {
-        await client.sendMessage(5544988484931, "Teste");
+        await client.sendMessage("5544988484931", "Teste");
     } catch (e) {
         console.error("Could not send message to your self");
         console.error(e);
