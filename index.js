@@ -23,22 +23,25 @@ const client = new Client({
 
 // Save session values to the file upon successful auth
 client.on('authenticated', (session) => {
+    console.log("authenticated");
     sessionData = session;
     fs.writeFile(SESSION_FILE_PATH, JSON.stringify(session), function (err) {
         if (err) {
+            console.log("Error on writing session file")
             console.error(err);
         }
     });
 });
 
 client.on('qr', qr => {
+    console.log("qr");
     qrcode.generate(qr, {small: true});
 });
 
 const brendaChatId = '554488413398@c.us';
 const groupChatId = '554498401456-1579545386@g.us'; 
 
-client.on('ready', async () => {
+client.on('ready', () => {
     console.log('ready');
     // const chats = await client.getChats();
     // console.log(chats.filter(chat => chat.name.toLowerCase().includes('minha brenda')));
@@ -48,6 +51,8 @@ client.on('ready', async () => {
 });
 
 client.on('message', async msg => {
+    console.log("message received");
+
     let groupChat = await msg.getChat();
     if (groupChat && groupChat.id._serialized == groupChatId && msg.body.toLowerCase().includes('corno')) {
         let responses = ["oi", "eu", "chamou?", ":'("];
@@ -65,7 +70,5 @@ client.on('disconnected', () => {
     console.log('reconnecting...');
     client.initialize();
 });
-
-console.log('a');
 
 client.initialize();
