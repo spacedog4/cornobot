@@ -41,8 +41,10 @@ client.on('qr', qr => {
 const brendaChatId = '554488413398@c.us';
 const groupChatId = '554498401456-1579545386@g.us'; 
 
-client.on('ready', () => {
+client.on('ready', async () => {
     console.log('ready');
+
+    await client.sendMessage(5544988484931, "Teste");
     // const chats = await client.getChats();
     // console.log(chats.filter(chat => chat.name.toLowerCase().includes('minha brenda')));
     // const chat = new Chat();
