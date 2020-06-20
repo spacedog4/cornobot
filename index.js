@@ -34,32 +34,36 @@ client.on('qr', qr => {
 const brendaChatId = '554488413398@c.us';
 const groupChatId = '554498401456-1579545386@g.us'; 
 
-client.on('ready', async () => {
-    console.log('ready');
-    // const chats = await client.getChats();
-    // console.log(chats.filter(chat => chat.name.toLowerCase().includes('minha brenda')));
-    // const chat = new Chat();
-    // const groupChat = await client.getChatById('554498401456-1579545386@g.us');
-    // console.log(groupChat);
-});
+try {
+    client.on('ready', async () => {
+        console.log('ready');
+        // const chats = await client.getChats();
+        // console.log(chats.filter(chat => chat.name.toLowerCase().includes('minha brenda')));
+        // const chat = new Chat();
+        // const groupChat = await client.getChatById('554498401456-1579545386@g.us');
+        // console.log(groupChat);
+    });
 
-client.on('message', async msg => {
-    let groupChat = await msg.getChat();
-    if (groupChat && groupChat.id._serialized == groupChatId && msg.body.toLowerCase().includes('corno')) {
-        let responses = ["oi", "eu", "chamou?", ":'("];
+    client.on('message', async msg => {
+        let groupChat = await msg.getChat();
+        if (groupChat && groupChat.id._serialized == groupChatId && msg.body.toLowerCase().includes('corno')) {
+            let responses = ["oi", "eu", "chamou?", ":'("];
 
-        if (msg.body.toLowerCase().replace(/[\u0300-\u036f]/g, "").includes('andre')) {
-            responses.push("corno é tu");
+            if (msg.body.toLowerCase().replace(/[\u0300-\u036f]/g, "").includes('andre')) {
+                responses.push("corno é tu");
+            }
+
+            msg.reply(responses[Math.floor(Math.random() * responses.length)]);
         }
+    });
 
-        msg.reply(responses[Math.floor(Math.random() * responses.length)]);
-    }
-});
+    client.on('disconnected', () => {
+        console.log('disconnected');
+        console.log('reconnecting...');
+        client.initialize();
+    });
 
-client.on('disconnected', () => {
-    console.log('disconnected');
-    console.log('reconnecting...');
     client.initialize();
-});
-
-client.initialize();
+} catch (e) {
+    console.log(e);
+}
