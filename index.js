@@ -15,7 +15,11 @@ try {
 
     // Use the saved values
     const client = new Client({
-        session: sessionData
+        session: sessionData,
+        puppeteer: {
+            headless: true, 
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
+        }
     });
 
     // Save session values to the file upon successful auth
