@@ -44,7 +44,12 @@ const groupChatId = '554498401456-1579545386@g.us';
 client.on('ready', async () => {
     console.log('ready');
 
-    await client.sendMessage(5544988484931, "Teste");
+    try {
+        await client.sendMessage(5544988484931, "Teste");
+    } catch (e) {
+        console.error("Could not send message to your self");
+        console.error(e);
+    }
     // const chats = await client.getChats();
     // console.log(chats.filter(chat => chat.name.toLowerCase().includes('minha brenda')));
     // const chat = new Chat();
