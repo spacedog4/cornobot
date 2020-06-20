@@ -71,4 +71,9 @@ client.on('disconnected', () => {
     client.initialize();
 });
 
-client.initialize();
+try {
+    console.log("initializing");
+    client.initialize();
+} catch (e) {
+    console.log("error on initializing");
+}
