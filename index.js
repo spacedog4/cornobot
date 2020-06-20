@@ -3,8 +3,6 @@ const fs = require('fs');
 
 const { Client, Chat } = require('whatsapp-web.js');
 
-console.log('a');
-
 // Path where the session data will be stored
 const SESSION_FILE_PATH = './session.json';
 
@@ -67,5 +65,7 @@ client.on('disconnected', () => {
     console.log('reconnecting...');
     client.initialize();
 });
+
+console.log('a');
 
 client.initialize();
